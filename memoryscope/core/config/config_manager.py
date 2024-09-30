@@ -35,7 +35,8 @@ class ConfigManager(object):
         kwargs.update(kwargs_padding)
 
         # (high) when there are environment variables, read them and merge into kwargs
-        kwargs_from_env = {x.name:os.environ.get(x.name, None) for x in fields(Arguments) if os.environ.get(x.name, None) is not None}
+        kwargs_from_env = {x.name: os.environ.get(x.name, None)
+                           for x in fields(Arguments) if os.environ.get(x.name, None) is not None}
         kwargs.update(kwargs_from_env)
 
         # generate argument dataclass
@@ -50,16 +51,16 @@ class ConfigManager(object):
 
     def read_config(self, config_path: str):
         if config_path.endswith(".yaml"):
-            with open(config_path) as f:
+            with open(config_path, encoding="utf-8") as f:
                 self.config = yaml.load(f, yaml.FullLoader)
 
         elif config_path.endswith(".json"):
-            with open(config_path) as f:
+            with open(config_path, encoding="utf-8") as f:
                 self.config = json.load(f)
 
     @staticmethod
     def update_ignore_none(config, new_config_dict):
-        update_dict = {k:v for k, v in new_config_dict.items() if v is not None}
+        update_dict = {k: v for k, v in new_config_dict.items() if v is not None}
         config.update(update_dict)
         return
 
@@ -191,7 +192,7 @@ class ConfigManager(object):
             raise NotImplementedError
 
         if file_path:
-            with open(file_path, "w") as f:
+            with open(file_path, "w", encoding="utf-8") as f:
                 f.write(content)
 
         return content

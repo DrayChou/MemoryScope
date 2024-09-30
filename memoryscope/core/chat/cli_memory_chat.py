@@ -15,6 +15,7 @@ class CliMemoryChat(ApiMemoryChat):
     """
     USER_COMMANDS = {
         "exit": "Exit the CLI.",
+        "bye": "Exit the CLI.",
         "clear": "Clear the command history.",
         "help": "Display available CLI commands and their descriptions.",
         "stream": "Toggle between getting streamed responses from the model."
@@ -108,7 +109,7 @@ class CliMemoryChat(ApiMemoryChat):
         questionary.print("> ", end="", style="fg:yellow")
         questionary.print(f"{self.assistant_name}: ", end="", style="bold")
 
-        if command == "exit":
+        if command == "exit" or command == "bye":
             self.memory_service.stop_backend_service()
             continue_run = False
 

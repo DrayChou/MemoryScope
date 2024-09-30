@@ -91,12 +91,12 @@ class PromptHandler(object):
 
         if file_path.endswith(".yaml"):
             # Load prompts from a YAML file
-            with open(file_path) as f:
+            with open(file_path, encoding='utf-8') as f:
                 prompt_dict = yaml.load(f, yaml.FullLoader)
 
         elif file_path.endswith(".json"):
             # Load prompts from a JSON file (corrected file handling)
-            with open(file_path) as f:
+            with open(file_path, encoding='utf-8') as f:
                 prompt_dict = json.load(f)
 
         # Merge the loaded prompts into the existing dictionary
